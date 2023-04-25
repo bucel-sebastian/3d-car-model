@@ -5,6 +5,12 @@
 /.pnp
 .pnp.js
 
+/node_modules
+
+/public/models/car/bmw-m3
+/public/models/car/toyota-supra
+/public/models/car/lamborghini-revuelto
+
 # testing
 /coverage
 
