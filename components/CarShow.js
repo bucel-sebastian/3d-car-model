@@ -7,7 +7,7 @@ export default function CarShow() {
   return (
     <>
       <OrbitControls target={[0, 0.35, 0]} maxPolarAngle={1.45} />
-      <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]} />
+      <PerspectiveCamera makeDefault fov={50} position={[0, -2, -5]} />
 
       {/* let color = new Color(0,0,0); */}
       <color args={[0.001, 0.001, 0.001]} attach="background" />
