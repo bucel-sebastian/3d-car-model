@@ -2,8 +2,14 @@ import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import Ground from "./Ground";
 import Car from "./Car";
 import Rings from "./Rings";
+import ColorChanger from "./ColorChanger";
+import { useEffect, useRef, useState } from "react";
+import { Boxes } from "./Boxes";
+import { Circles } from "./Circles";
 
-export default function CarShow() {
+export default function CarShow(props) {
+  const { carColor } = props;
+
   return (
     <>
       <OrbitControls target={[0, 0.35, 0]} maxPolarAngle={1.45} />
@@ -34,7 +40,10 @@ export default function CarShow() {
         <boxGeometry args={[1, 1, 1]} />
         <meshBasicMaterial color={"purple"} />
       </mesh> */}
-      <Car />
+      {/* <ColorChanger></ColorChanger> */}
+      <Boxes />
+      <Circles />
+      <Car carColor={carColor} />
       <Rings />
       <Ground />
     </>
