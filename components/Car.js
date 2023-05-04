@@ -68,17 +68,9 @@ export default function Car(props, ref) {
       }
 
       if (object.name === carPartBody) {
-        console.log("se modifica " + bodyColor);
         object.material.color.set(bodyColor);
       }
-      //   setCarColor([carColor[0] + 1, 0, 0]);
-      //   object.material.color.set(
-      //     "#" +
-      //       new Color()
-      //         .setRGB(carColor[0] / 255, carColor[1] / 255, carColor[2] / 255)
-      //         .getHexString()
-      //   );
-      // }
+
       // Schimbare intensitate led-uri din spate
 
       if (object.name === carPartRearLights && turnOn) {
