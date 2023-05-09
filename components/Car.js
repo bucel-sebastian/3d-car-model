@@ -1,7 +1,14 @@
 import { useFrame, useLoader } from "@react-three/fiber";
-import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { Mesh } from "three";
+import { Mesh, audio } from "three";
+import { AudioLoader } from "three";
 import * as THREE from "three";
 import { Color } from "three";
 
@@ -166,6 +173,7 @@ export default function Car(props, ref) {
   return (
     <>
       <primitive object={gltf.scene} />
+
       {/* <input type="color" onInput={handleColorChange} /> */}
     </>
   );

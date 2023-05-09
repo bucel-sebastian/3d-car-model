@@ -1,4 +1,8 @@
-import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import {
+  OrbitControls,
+  PerspectiveCamera,
+  PositionalAudio,
+} from "@react-three/drei";
 import Ground from "./Ground";
 import Car from "./Car";
 import Rings from "./Rings";
@@ -6,14 +10,28 @@ import ColorChanger from "./ColorChanger";
 import { useEffect, useRef, useState } from "react";
 import { Boxes } from "./Boxes";
 import { Circles } from "./Circles";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame, useThree, useLoader } from "@react-three/fiber";
 import { Vector3 } from "three";
+import { Audio } from "@react-three/drei";
+import { AudioLoader } from "three";
+import * as THREE from "three";
+import Sound from "./Sound";
 
 export default function CarShow(props) {
+  // const [soundTrigger1, setSoundTrigger1] = useState(false);
+  // const [soundTrigger2, setSoundTrigger2] = useState(false);
+  // const [soundTrigger3, setSoundTrigger3] = useState(false);
+
   const cameraRef = useRef();
   const { setDefaultCamera } = useThree();
 
   const { carColor } = props;
+
+  // const audioIdle = useLoader(AudioLoader, "engine-idle.mp3");
+  // const audioStart = useLoader(AudioLoader, "/engine-start.mp3");
+  // const audioRev = useLoader(AudioLoader, "rev.wav");
+
+  // const startEngineAudio = useRef();
 
   let moveCamera = useRef(false);
   let moveX = useRef(false),
@@ -54,7 +72,15 @@ export default function CarShow(props) {
 
   useEffect(() => {
     setTimeout(() => {
+      setSoundTrigger2(true);
+    }, 1300);
+  }, [soundTrigger1]);
+
+  useEffect(() => {
+    setTimeout(() => {
       moveCamera.current = true;
+      // startEngineAudio.current.play();
+      setSoundTrigger1(true);
     }, 2500);
   });
 
@@ -94,6 +120,27 @@ export default function CarShow(props) {
         <meshBasicMaterial color={"purple"} />
       </mesh> */}
       {/* <ColorChanger></ColorChanger> */}
+
+      {/* <Sound
+        url="/engine-start.mp3"
+        position={new THREE.Vector3(0, 0, 0)}
+        startTrigger={soundTrigger1}
+      />
+
+      <Sound
+        url="/engine-idle.mp3"
+        position={new THREE.Vector3(0, 0, 0)}
+        startTrigger={soundTrigger2}
+        loop
+      />
+
+      <Sound
+        url="/rev.wav"
+        position={new THREE.Vector3(0, 0, 0)}
+        startTrigger={soundTrigger3}
+        stopTrigger={!soundTrigger3}
+      /> */}
+
       <Boxes />
       <Circles />
       <Car carColor={carColor} />
