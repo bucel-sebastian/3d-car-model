@@ -67,8 +67,8 @@ export default function Home() {
     }, 4000);
   };
   const playThirdSound = () => {
+    setThirdSoundPlaying(true);
     if (!thirdSoundPlaying) {
-      setThirdSoundPlaying(true);
       const source = engineRevAudioContext.createBufferSource();
       source.buffer = engineRevAudioBuffer;
       source.connect(engineRevAudioContext.destination);
@@ -118,10 +118,12 @@ export default function Home() {
   useEffect(() => {
     if (engineStartAudioContext) {
       setTimeout(() => {
-        playSound();
-        setTimeout(() => {
-          playSecondSound();
-        }, 1000);
+        if (sceneLoaded) {
+          playSound();
+          setTimeout(() => {
+            playSecondSound();
+          }, 1000);
+        }
       }, 2500);
     }
   }, [sceneLoaded]);
