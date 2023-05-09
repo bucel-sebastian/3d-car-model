@@ -70,17 +70,17 @@ export default function CarShow(props) {
     }
   });
 
-  useEffect(() => {
-    setTimeout(() => {
-      setSoundTrigger2(true);
-    }, 1300);
-  }, [soundTrigger1]);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setSoundTrigger2(true);
+  //   }, 1300);
+  // }, [soundTrigger1]);
 
   useEffect(() => {
     setTimeout(() => {
       moveCamera.current = true;
       // startEngineAudio.current.play();
-      setSoundTrigger1(true);
+      // setSoundTrigger1(true);
     }, 2500);
   });
 

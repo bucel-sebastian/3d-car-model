@@ -91,3 +91,24 @@ html {
   text-align: center;
   font-family: "Arial";
 }
+
+.page_block{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.page_block_button{
+  color:#1a1a1a;
+  background-color: #fafafa;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: 600px;
+  padding: 10px 50px;
+}
