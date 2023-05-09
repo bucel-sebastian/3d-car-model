@@ -67,22 +67,28 @@ export default function Home() {
     }, 4000);
   };
   const playThirdSound = () => {
-    setThirdSoundPlaying(true);
     if (!thirdSoundPlaying) {
       const source = engineRevAudioContext.createBufferSource();
       source.buffer = engineRevAudioBuffer;
       source.connect(engineRevAudioContext.destination);
       source.start();
-      setTimeout(() => {
-        setThirdSoundPlaying(false);
-      }, 5000);
+      // setTimeout(() => {
+      //   setThirdSoundPlaying(false);
+      // }, 7000);
     }
   };
 
   useEffect(() => {
     window.addEventListener("keydown", (event) => {
       if (event.key === "w") {
+        setThirdSoundPlaying(true);
         playThirdSound();
+      }
+    });
+
+    window.addEventListener("keyup", (event) => {
+      if (event.key === "w") {
+        setThirdSoundPlaying(false);
       }
     });
   }, [engineRevAudioContext]);
