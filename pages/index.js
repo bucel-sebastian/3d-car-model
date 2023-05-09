@@ -4,6 +4,7 @@ import { Canvas } from "@react-three/fiber";
 import { Suspense, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretUp } from "@fortawesome/free-solid-svg-icons";
+import { useRef } from "react";
 
 // import engineStart from "/engine-start.mp3";
 // import engineRev from "/rev.wav";
@@ -18,8 +19,8 @@ export default function Home() {
   const [engineIdleAudioBuffer, setEngineIdleAudioBuffer] = useState(null);
   const [engineRevAudioContext, setEngineRevAudioContext] = useState(null);
   const [engineRevAudioBuffer, setEngineRevAudioBuffer] = useState(null);
-  const [thirdSoundPlaying, setThirdSoundPlaying] = useState(false);
 
+  const thirdSoundPlaying = useRef();
   useEffect(() => {
     const loadAudio = async () => {
       const response = await fetch("/engine-start.mp3");
@@ -67,7 +68,7 @@ export default function Home() {
     }, 4000);
   };
   const playThirdSound = () => {
-    if (!thirdSoundPlaying) {
+    if (!thirdSoundPlaying.current) {
       const source = engineRevAudioContext.createBufferSource();
       source.buffer = engineRevAudioBuffer;
       source.connect(engineRevAudioContext.destination);
@@ -80,18 +81,21 @@ export default function Home() {
 
   useEffect(() => {
     window.addEventListener("keydown", (event) => {
+      event.preventDefault();
       if (event.key === "w") {
-        setThirdSoundPlaying(true);
-        playThirdSound();
+        if (!thirdSoundPlaying.current) {
+          playThirdSound();
+        }
+        thirdSoundPlaying.current = true;
       }
     });
 
     window.addEventListener("keyup", (event) => {
       if (event.key === "w") {
-        setThirdSoundPlaying(false);
+        thirdSoundPlaying.current = false;
       }
     });
-  }, [engineRevAudioContext]);
+  }, [engineRevAudioContext, thirdSoundPlaying]);
 
   const [sceneLoaded, setSceneLoaded] = useState(false);
   const [loadingTextDots, setLoadingTextDots] = useState(".");
@@ -111,6 +115,7 @@ export default function Home() {
   const sceneIsLoaded = () => {
     setSceneLoaded(true);
   };
+
   useEffect(() => {
     setTimeout(() => {
       if (loadingTextDots === "...") {
